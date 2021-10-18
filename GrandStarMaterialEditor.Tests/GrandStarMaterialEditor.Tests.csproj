@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GrandStarMaterialEditor.Lib\MaterialEditor.Lib.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="grandstar_materials.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
