@@ -27,13 +27,13 @@ namespace MaterialEditor.Lib
 
         private TexHeader() { }
 
-        public static TexHeader[] GetTexHeaders(JArray arr) => arr.ToObject<TexHeader[]>();
+        public static (TexHeader[] Headers, JArray Array) GetTexHeaders(JArray arr) => (arr.ToObject<TexHeader[]>(), arr);
 
-        public static TexHeader[] GetTexHeaders(string text) => GetTexHeaders(JArray.Parse(text));
+        public static (TexHeader[] Headers, JArray Array) GetTexHeaders(string text) => GetTexHeaders(JArray.Parse(text));
 
-        public static TexHeader[] GetTexHeaders(StreamReader sr) => GetTexHeaders(sr.ReadToEnd());
+        public static (TexHeader[] Headers, JArray Array) GetTexHeaders(StreamReader sr) => GetTexHeaders(sr.ReadToEnd());
 
-        public static TexHeader[] GetTexHeaders(FileInfo file) => GetTexHeaders(File.ReadAllText(file.FullName));
+        public static (TexHeader[] Headers, JArray Array) GetTexHeaders(FileInfo file) => GetTexHeaders(File.ReadAllText(file.FullName));
 
         public static JArray ToJArray(TexHeader[] arr) => JArray.FromObject(arr);
 
