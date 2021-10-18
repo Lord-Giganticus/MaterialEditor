@@ -1,8 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -18,9 +15,9 @@ namespace MaterialEditor.Lib
 
         public MaterialFile(string text) : this() => InitLines(text);
 
-        public MaterialFile(FileInfo file) : this(File.ReadAllText(file.FullName)) => Thread.Sleep(TimeSpan.Zero);
+        public MaterialFile(FileInfo file) : this(File.ReadAllText(file.FullName)) { }
 
-        public MaterialFile(StreamReader sr) : this(sr.ReadToEnd()) => Thread.Sleep(TimeSpan.Zero);
+        public MaterialFile(StreamReader sr) : this(sr.ReadToEnd()) { }
 
         protected void InitLines(string text)
         {

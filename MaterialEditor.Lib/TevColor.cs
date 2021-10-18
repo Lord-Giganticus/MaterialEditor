@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Newtonsoft.Json;
 
 namespace MaterialEditor.Lib
 {
@@ -25,11 +23,15 @@ namespace MaterialEditor.Lib
             EnsureValues();
         }
 
+        public TevColor(double R, double G, double B) : this((R, G, B)) { }
+
         protected virtual void EnsureValues()
         {
             if (R != 0 && R >= 1) R /= 255;
             if (G != 0 && G >= 1) G /= 255;
             if (B != 0 && B > 1) B /= 255;
         }
+
+        public override string ToString() => JsonConvert.SerializeObject(this, Formatting.Indented);
     }
 }
