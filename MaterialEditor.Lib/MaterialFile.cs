@@ -11,7 +11,7 @@ namespace MaterialEditor.Lib
         [JsonIgnore]
         protected JArray Array { get; set; }
 
-        private MaterialFile() => TevColors = new TevColor[][] { };
+        private MaterialFile() => TevColors = new TevColor[][]{};
 
         public MaterialFile(string text) : this() => InitLines(text);
 
