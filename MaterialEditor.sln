@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaterialEditor.Lib", "GrandStarMaterialEditor.Lib\MaterialEditor.Lib.csproj", "{43E2AF65-1F02-4377-81F0-6838C450427D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrandStarMaterialEditor.Tests", "GrandStarMaterialEditor.Tests\GrandStarMaterialEditor.Tests.csproj", "{8021E013-6D85-48A6-9429-932EAC5A5213}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43E2AF65-1F02-4377-81F0-6838C450427D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43E2AF65-1F02-4377-81F0-6838C450427D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43E2AF65-1F02-4377-81F0-6838C450427D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43E2AF65-1F02-4377-81F0-6838C450427D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8021E013-6D85-48A6-9429-932EAC5A5213}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8021E013-6D85-48A6-9429-932EAC5A5213}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8021E013-6D85-48A6-9429-932EAC5A5213}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8021E013-6D85-48A6-9429-932EAC5A5213}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A7820538-CA39-4116-8E3F-ECF9C5D948A8}
+	EndGlobalSection
+EndGlobal
