@@ -21,13 +21,11 @@ namespace MaterialEditor.Lib
 
         protected void InitLines(string text)
         {
-            var colors = new List<TevColor[]>();
             Array = JArray.Parse(text);
-            foreach (var obj in Array.Children<JObject>())
-                foreach (var prop in obj.Properties())
-                    if (prop.Name is "TevColors")
-                        colors.Add(prop.Value.ToObject<TevColor[]>());
-            TevColors = colors.ToArray();
+            var colors = new TevColor[Array.Count][];
+            for (int i = 0; i < Array.Count; i++)
+                colors[i] = Array[i]["TevColors"].ToObject<TevColor[]>();
+            TevColors = colors;
         }
 
         public string Serialize(int[] indexes)
