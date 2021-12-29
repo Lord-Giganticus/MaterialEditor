@@ -2,7 +2,7 @@
 {
     public record struct MaterialFile
     {
-        public TevColor?[][] TevColors { get; set; }
+        public Color?[][] TevColors { get; set; }
         [JsonIgnore]
         private JArray Array { get; set; }
 
@@ -21,9 +21,9 @@
         private void InitLines(string text)
         {
             Array = JArray.Parse(text);
-            var colors = new TevColor?[Array.Count][];
+            var colors = new Color?[Array.Count][];
             for (int i = 0; i < Array.Count; i++)
-                    colors[i] = Array[i]["TevColors"].ToObject<TevColor?[]>();
+                    colors[i] = Array[i]["TevColors"].ToObject<Color?[]>();
             TevColors = colors;
         }
 
