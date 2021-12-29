@@ -5,7 +5,13 @@ public record struct TexHeaderFile
     [JsonIgnore]
     private JArray Array;
 
-    public TexHeader?[] Headers;
+    private TexHeader?[] Headers;
+
+    public TexHeader? this[int index]
+    {
+        get => Headers[index];
+        set => Headers[index] = value;
+    }
 
     public static implicit operator TexHeaderFile((TexHeader?[] Headers, JArray Array) tup) =>
         new() { Array = tup.Array, Headers = tup.Headers};
