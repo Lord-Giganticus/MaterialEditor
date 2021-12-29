@@ -28,6 +28,23 @@
 
         public Color(double R, double G, double B, double A) : this((R, G, B, A)) { }
 
+        public void Deconstruct(out double R, out double G, out double B, out double A)
+        {
+            R = (this.R * 255);
+            G = (this.G * 255);
+            B = (this.B * 255);
+            A = (this.A * 255);
+        }
+
+        public static implicit operator (double R, double G, double B, double A)(Color color)
+        {
+            var (r, g, b, a) = color;
+            return (r, g, b, a);
+        }
+
+        public static implicit operator Color((double R, double G, double B, double A) tup) =>
+            new(tup);
+
         private void EnsureValues()
         {
             if (R != 0 && R > Max) R /= 255;

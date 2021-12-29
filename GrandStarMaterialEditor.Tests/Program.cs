@@ -13,8 +13,8 @@ class Program
         BenchmarkRunner.Run<Bench>();
 #elif DEBUG
         var m = new MaterialFile(new FileInfo("grandstar_materials.json"));
-        var color = (Color)m[1].TevColors[0];
-        (int, int, int) rbg = ((int)(color.R * 255), (int)(color.G * 255), (int)(color.B * 255));
+        m[1].TevColors[0] = new Color(88, 29, 144);
+        (double, double, double, double) tup = (Color)m[1].TevColors[0];
 #endif
     }
 }

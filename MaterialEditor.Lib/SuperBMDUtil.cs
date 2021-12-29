@@ -1,6 +1,6 @@
 ﻿namespace MaterialEditor.Lib
 {
-    public class SuperBMDUtil
+    public static class SuperBMDUtil
     {
         public static Model GetModel(FileInfo file)
         {
