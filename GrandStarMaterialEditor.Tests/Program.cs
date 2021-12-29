@@ -8,6 +8,8 @@ class Program
 {
     static void Main(string[] args)
     {
+#if RELEASE
         BenchmarkRunner.Run<Bench>();
+#endif
     }
 }

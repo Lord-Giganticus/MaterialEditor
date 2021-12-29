@@ -12,9 +12,9 @@
 
         public MaterialFile(StreamReader sr) : this(sr.ReadToEnd()) { }
 
-        public JToken this[int index]
+        public JObject this[int index]
         {
-            get => Array[index];
+            get => (JObject)Array[index];
             set => Array[index] = value;
         }
 
