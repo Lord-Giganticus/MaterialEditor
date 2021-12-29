@@ -2,8 +2,8 @@
 {
     public record struct MaterialFile
     {
-        public Color?[][] TevColors { get; set; }
-        [JsonIgnore]
+        private Material[] Materials { get; set; }
+
         private JArray Array { get; set; }
 
         public MaterialFile(string text) : this() => InitLines(text);
@@ -12,25 +12,21 @@
 
         public MaterialFile(StreamReader sr) : this(sr.ReadToEnd()) { }
 
-        public JObject this[int index]
+        public Material this[int index]
         {
-            get => (JObject)Array[index];
-            set => Array[index] = value;
+            get => Materials[index];
+            set => Materials[index] = value;
         }
 
         private void InitLines(string text)
         {
             Array = JArray.Parse(text);
-            var colors = new Color?[Array.Count][];
-            for (int i = 0; i < Array.Count; i++)
-                    colors[i] = Array[i]["TevColors"].ToObject<Color?[]>();
-            TevColors = colors;
+            Materials = Array.ToObject<Material[]>();
         }
 
         public override string ToString()
         {
-            for (int index = 0; index < Array.Count; index++)
-                Array[index]["TevColors"] = JArray.FromObject(TevColors[index]);
+            Array = JArray.FromObject(Materials);
             return Array.ToString(Formatting.Indented);
         }
 
