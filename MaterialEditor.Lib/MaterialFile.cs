@@ -12,6 +12,12 @@
 
         public MaterialFile(StreamReader sr) : this(sr.ReadToEnd()) { }
 
+        public JToken this[int index]
+        {
+            get => Array[index];
+            set => Array[index] = value;
+        }
+
         private void InitLines(string text)
         {
             Array = JArray.Parse(text);
