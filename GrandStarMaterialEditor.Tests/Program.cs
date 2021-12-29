@@ -1,16 +1,13 @@
-﻿using System;
-using System.IO;
-using MaterialEditor.Lib;
+﻿global using MaterialEditor.Lib;
+global using BenchmarkDotNet.Attributes;
+global using BenchmarkDotNet.Running;
 
-namespace MaterialEditor.Tests
+namespace GrandStarMaterialEditor.Tests;
+
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            var m = new MaterialFile(new FileInfo("grandstar_materials.json"));
-            m.TevColors[1][0] = new TevColor(88, 29, 144);
-            File.WriteAllText("test.json", m.Serialize(new int[]{ 1 }));
-        }
+        BenchmarkRunner.Run<Bench>();
     }
 }

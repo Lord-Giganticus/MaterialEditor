@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-namespace MaterialEditor.Lib
+﻿namespace MaterialEditor.Lib
 {
-    public class TexHeader
+    public record struct TexHeader
     {
         public string Name;
         public string Format;
@@ -25,18 +18,14 @@ namespace MaterialEditor.Lib
         public double MaxLOD;
         public double LodBias;
 
-        private TexHeader() { }
+        public static TexHeaderFile GetTexHeaders(JArray arr) => (arr.ToObject<TexHeader?[]>(), arr);
 
-        public static (TexHeader[] Headers, JArray Array) GetTexHeaders(JArray arr) => (arr.ToObject<TexHeader[]>(), arr);
+        public static TexHeaderFile GetTexHeaders(string text) => GetTexHeaders(JArray.Parse(text));
 
-        public static (TexHeader[] Headers, JArray Array) GetTexHeaders(string text) => GetTexHeaders(JArray.Parse(text));
+        public static TexHeaderFile GetTexHeaders(StreamReader sr) => GetTexHeaders(sr.ReadToEnd());
 
-        public static (TexHeader[] Headers, JArray Array) GetTexHeaders(StreamReader sr) => GetTexHeaders(sr.ReadToEnd());
+        public static TexHeaderFile GetTexHeaders(FileInfo file) => GetTexHeaders(File.ReadAllText(file.FullName));
 
-        public static (TexHeader[] Headers, JArray Array) GetTexHeaders(FileInfo file) => GetTexHeaders(File.ReadAllText(file.FullName));
-
-        public static JArray ToJArray(TexHeader[] arr) => JArray.FromObject(arr);
-
-        public override string ToString() => JsonConvert.SerializeObject(this, Formatting.Indented);
+        public static JArray ToJArray(TexHeader?[] arr) => JArray.FromObject(arr);
     }
 }

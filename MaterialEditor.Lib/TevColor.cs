@@ -1,8 +1,6 @@
-﻿using Newtonsoft.Json;
-
-namespace MaterialEditor.Lib
+﻿namespace MaterialEditor.Lib
 {
-    public class TevColor
+    public struct TevColor
     {
         public double R { get; set; }
 
@@ -12,20 +10,15 @@ namespace MaterialEditor.Lib
 
         public double A { get; set; }
 
-        private TevColor()
+        public TevColor((double R, double G, double B) tup)
         {
-            R = 0; G = 0; B = 0; A = 1;
-        }
-
-        public TevColor((double R, double G, double B) tup) : this()
-        {
-            R = tup.R; G = tup.G; B = tup.B;
+            R = tup.R; G = tup.G; B = tup.B; A = 1;
             EnsureValues();
         }
 
         public TevColor(double R, double G, double B) : this((R, G, B)) { }
 
-        protected virtual void EnsureValues()
+        private void EnsureValues()
         {
             if (R != 0 && R >= 1) R /= 255;
             if (G != 0 && G >= 1) G /= 255;

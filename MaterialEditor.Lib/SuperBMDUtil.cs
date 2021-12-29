@@ -1,21 +1,12 @@
-﻿using SuperBMDLib;
-using SuperBMDLib.Geometry;
-using System.IO;
-using System.Diagnostics;
-using System.Text;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using GameFormatReader.Common;
-
-namespace MaterialEditor.Lib
+﻿namespace MaterialEditor.Lib
 {
     public class SuperBMDUtil
     {
         public static Model GetModel(FileInfo file)
         {
-            using FileStream str = new FileStream(file.FullName, FileMode.Open, FileAccess.Read);
+            using FileStream str = new(file.FullName, FileMode.Open, FileAccess.Read);
             using var reader = new EndianBinaryReader(str, Endian.Big);
-            var dir = new FileInfo(Process.GetCurrentProcess().MainModule.FileName).Directory;
+            var dir = new FileInfo(Environment.ProcessPath).Directory;
             var args = new Arguments
             {
                 input_path = dir.FullName
@@ -27,9 +18,35 @@ namespace MaterialEditor.Lib
             return r;
         }
 
-        public static MaterialFile GetMaterials(Model mod) => new MaterialFile(JsonConvert.SerializeObject(mod.Materials.m_Materials, Formatting.Indented));
+        public static (MaterialFile Mats, TexHeaderFile TexHeader) LoadModel(FileInfo file)
+        {
+            using FileStream str = new(file.FullName, FileMode.Open, FileAccess.Read);
+            using var reader = new EndianBinaryReader(str, Endian.Big);
+            reader.Skip(32);
+            var inf = new INF1(reader, 32);
+            var vtx = new VTX1(reader, (int)reader.BaseStream.Position);
+            var evp = new EVP1(reader, (int)reader.BaseStream.Position);
+            var drw = new DRW1(reader, (int)reader.BaseStream.Position);
+            var jnt = new JNT1(reader, (int)reader.BaseStream.Position);
+            var shp = SHP1.Create(reader, (int)reader.BaseStream.Position);
+            var mat = new MAT3(reader, (int)reader.BaseStream.Position);
+            SkipMDL3(reader);
+            var tex = new TEX1(reader, (int)reader.BaseStream.Position);
+            return (mat, TexHeader.GetTexHeaders(JsonConvert.SerializeObject(tex.Textures)));
+        }
 
-        public static (TexHeader[] Headers, JArray Array) GetTexHeaders(Model mod) => TexHeader.GetTexHeaders(JsonConvert.SerializeObject(mod.Textures.Textures, Formatting.Indented));
+        private static void SkipMDL3(EndianBinaryReader reader)
+        {
+            if (reader.PeekReadInt32() == 0x4D444C33)
+            {
+                int mdl3Size = reader.ReadInt32At(reader.BaseStream.Position + 4);
+                reader.Skip(mdl3Size);
+            }
+        }
+
+        public static MaterialFile GetMaterials(Model mod) => new(JsonConvert.SerializeObject(mod.Materials.m_Materials, Formatting.Indented));
+
+        public static TexHeaderFile GetTexHeaders(Model mod) => TexHeader.GetTexHeaders(JsonConvert.SerializeObject(mod.Textures.Textures, Formatting.Indented));
 
         public static MemoryStream ToStream(Model mod, bool isBDL = false)
         {
