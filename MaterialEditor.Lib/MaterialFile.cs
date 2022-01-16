@@ -4,6 +4,8 @@
     {
         private Material[] Materials { get; set; }
 
+        public int Count => Materials.Length;
+
         private JArray Array { get; set; }
 
         public MaterialFile(string text) : this() => InitLines(text);

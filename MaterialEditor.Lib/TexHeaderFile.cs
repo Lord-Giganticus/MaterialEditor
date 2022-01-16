@@ -7,6 +7,8 @@ public record struct TexHeaderFile
 
     private TexHeader?[] Headers;
 
+    public int Length => Headers.Length;
+
     public TexHeader? this[int index]
     {
         get => Headers[index];
