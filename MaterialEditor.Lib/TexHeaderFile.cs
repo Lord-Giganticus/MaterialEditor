@@ -18,6 +18,11 @@ public record struct TexHeaderFile
     public static implicit operator TexHeaderFile((TexHeader?[] Headers, JArray Array) tup) =>
         new() { Array = tup.Array, Headers = tup.Headers};
 
+    public static implicit operator TexHeaderFile(TEX1 tex)
+    {
+        return TexHeader.GetTexHeaders(JsonConvert.SerializeObject(tex.Textures));
+    }
+
     public override string ToString()
     {
         Array = JArray.FromObject(Headers);

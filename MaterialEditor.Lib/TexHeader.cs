@@ -25,7 +25,5 @@
         public static TexHeaderFile GetTexHeaders(StreamReader sr) => GetTexHeaders(sr.ReadToEnd());
 
         public static TexHeaderFile GetTexHeaders(FileInfo file) => GetTexHeaders(File.ReadAllText(file.FullName));
-
-        public static JArray ToJArray(TexHeader?[] arr) => JArray.FromObject(arr);
     }
 }

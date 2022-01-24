@@ -6,23 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\References\SuperBMD\SuperBMDLib\SuperBMDLib.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="AssimpNet">
-      <HintPath>..\References\SuperBMD\packages\AssimpNet.3.3.2\lib\net20\AssimpNet.dll</HintPath>
-    </Reference>
     <Reference Include="EndianBinaryStreams">
       <HintPath>..\References\SuperBMD\SuperBMDLib\lib\EndianBinaryStreams.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenTK">
-      <HintPath>..\References\SuperBMD\packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
     </Reference>
   </ItemGroup>
 

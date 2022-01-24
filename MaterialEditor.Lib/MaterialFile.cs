@@ -4,7 +4,7 @@
     {
         private Material[] Materials { get; set; }
 
-        public int Count => Materials.Length;
+        public int Length => Materials.Length;
 
         private JArray Array { get; set; }
 

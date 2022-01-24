@@ -32,7 +32,7 @@
             var mat = new MAT3(reader, (int)reader.BaseStream.Position);
             SkipMDL3(reader);
             var tex = new TEX1(reader, (int)reader.BaseStream.Position);
-            return (mat, TexHeader.GetTexHeaders(JsonConvert.SerializeObject(tex.Textures)));
+            return (mat, tex);
         }
 
         private static void SkipMDL3(EndianBinaryReader reader)
@@ -43,10 +43,6 @@
                 reader.Skip(mdl3Size);
             }
         }
-
-        public static MaterialFile GetMaterials(Model mod) => new(JsonConvert.SerializeObject(mod.Materials.m_Materials, Formatting.Indented));
-
-        public static TexHeaderFile GetTexHeaders(Model mod) => TexHeader.GetTexHeaders(JsonConvert.SerializeObject(mod.Textures.Textures, Formatting.Indented));
 
         public static MemoryStream ToStream(Model mod, bool isBDL = false)
         {
